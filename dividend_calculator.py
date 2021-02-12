@@ -29,24 +29,27 @@ sheetNo = 0
 while (sheetNo < total_sheets):
   ws = wb.worksheets[sheetNo]
   
-  #Read till last row in the worksheet
   rowNo = 1
   print("SHEET NO:{}".format(sheetNo+1))
 
-  #scroll through each entry in the excel sheet
+  #Read till last row in the worksheet
   while rowNo <= ws.max_row:
-    #Fetch the entry present in row and column
+    #Fetch the transaction remark from row and column
     txn_remark = ws.cell(row=rowNo,column=TRANSACTION_REMARK_COL).value
  
     #print("txn_remark:{}".format(txn_remark))
+    #Handle error cases
     if (txn_remark is None) or ((txn_remark.find("Withdrawal Amount") != -1) or (txn_remark.find(TRANSACTION_STR_FOR_DIVIDEND) == -1)):
       rowNo = rowNo + 1
       continue
- 
+
+    #Fetch the dividend amount from row and column 
     dividend_amt = ws.cell(row=rowNo,column=DEPOSIT_AMT_COL).value
 
     txn_remark = txn_remark.replace("\n", "")
     print("   ** {} : {}".format(txn_remark, dividend_amt))
+  
+    #Add dividend amount in total_dividend
     total_dividend = total_dividend + float(dividend_amt)
     rowNo = rowNo + 1        
       
