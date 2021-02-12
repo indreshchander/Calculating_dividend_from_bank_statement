@@ -1,2 +1,6 @@
-# Calculating_dividend_from_bank_statement
-This python script calculate total dividend received by a person in the given bank statement given in excel format.
+1. Fetch bank statement of complete year from the bank site.
+
+2. Convert bank statement pdf to excel sheet format via online tool.
+
+3. Run dividend_calculator.py script as given below.
+   #python dividend_calculator.py ICICI.xlsx
